@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Pagination, Stack, Toolbar } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CatagoryList from "../containers/CatagoryList";
@@ -8,15 +8,16 @@ import SearchBar from "../containers/SearchBar";
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         const fetchMovies = async () => {
-            const { data } = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=40f0e7d626ebd843c9c96e4bcdc282b0");
-            console.log(data);
+            const { data } = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=40f0e7d626ebd843c9c96e4bcdc282b0&page=" + page);
+
             setMovies([...data.results]);
         };
         fetchMovies();
-    }, []);
+    }, [page]);
 
     return (
         <>
@@ -32,6 +33,11 @@ const Home = () => {
                     ))}
                 </Grid>
             </Box>
+            <Toolbar />
+            <Stack justifyContent={"center"} direction="row">
+                <Pagination count={10} color="primary" onChange={(event, page) => setPage(page)} sx={{ justifyContent: "center" }} />
+            </Stack>
+            <Toolbar />
         </>
     );
 };

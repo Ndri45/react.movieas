@@ -5,21 +5,24 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { ShoppingCart } from "@mui/icons-material";
 
-export default function MovieCard(props) {
+export default function MovieCard({ movie }) {
     return (
         <Card>
-            <CardMedia component="img" height="200" image={"https://image.tmdb.org/t/p/w500/" + props.poster_path} alt="animal avatar" />
+            <CardMedia component="img" width="500" image={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} alt="animal avatar" />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                <Typography gutterBottom variant="h5" component="div" height={"80px"}>
+                    {movie.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica
+                <Typography variant="body1" color="text.secondary" component="div" height="140px">
+                    {movie.overview}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Buy</Button>
+            <CardActions sx={{ justifyContent: "center" }}>
+                <Button size="small" variant="contained">
+                    <ShoppingCart />
+                </Button>
             </CardActions>
         </Card>
     );

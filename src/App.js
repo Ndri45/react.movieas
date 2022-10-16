@@ -5,6 +5,7 @@ import Bookmark from "./pages/Bookmark";
 import Bought from "./pages/Bought";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
     { path: "/", element: <Home /> },
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     { path: "/bought", element: <Bought /> },
     { path: "/checkout", element: <Checkout /> },
     { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
 ]);
 
 function App() {

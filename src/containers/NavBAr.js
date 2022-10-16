@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { useSelector } from "react-redux";
 
 const pages = [
     { name: "Bookmark", path: "/bookmark" },
@@ -21,7 +22,7 @@ const pages = [
 const settings = ["Logout"];
 
 export default function NavBar() {
-    const user = null;
+    const user = useSelector((state) => console.log(state.user));
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 

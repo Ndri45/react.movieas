@@ -30,7 +30,10 @@ const Login = () => {
                 </Typography>
                 <Typography>
                     {" "}
-                    Do you have an account ?<Link href="#">Sign Up</Link>
+                    Do you have an account ?
+                    <Typography component="a" href="/register">
+                        Sign Up
+                    </Typography>
                 </Typography>
             </Paper>
         </Grid>

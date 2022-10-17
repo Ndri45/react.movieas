@@ -1,6 +1,19 @@
 import { Box, Link } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function CatagoryList() {
+    const [genres, setGenres] = useState([]);
+
+    useEffect(() => {
+        const fetchGenres = async () => {
+            const { data } = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=40f0e7d626ebd843c9c96e4bcdc282b0");
+
+            setGenres(data.genres);
+        };
+        fetchGenres();
+    });
+
     return (
         <Box
             sx={{
@@ -14,15 +27,13 @@ export default function CatagoryList() {
                 marginTop: "10px",
             }}
         >
-            <Link href="#" underline="hover">
-                {"Catagory One"}
-            </Link>
-            <Link href="#" underline="hover">
-                {"Catagory Two"}
-            </Link>
-            <Link href="#" underline="hover">
-                {"Catagory Tree"}
-            </Link>
+            {genres.map((genre) => {
+                return (
+                    <Link href="#" underline="hover">
+                        {genre.name}
+                    </Link>
+                );
+            })}
         </Box>
     );
 }

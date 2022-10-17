@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Avatar, Button, Checkbox, FormControlLabel, Grid, Paper, TextField, Typography } from "@mui/material";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Avatar, Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
-import { signUpWithEmailAndPassword } from "../services/user";
 import { auth } from "../configs/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -14,7 +12,6 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = async () => {

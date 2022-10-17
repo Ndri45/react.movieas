@@ -4,24 +4,25 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { LockOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { signUpWithEmailAndPassword } from "../services/user";
+import { auth } from "../configs/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
     const btnstyle = { margin: "8px 0" };
     const avatarStyle = { backgroundColor: "#1bbd7e" };
-    const paperStyle = { padding: 20, height: "70vh", width: 280, margin: "20px auto" };
+    const paperStyle = { padding: 20, width: 400, margin: "120px auto" };
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         try {
-            dispatch(signUpWithEmailAndPassword({ email, password }));
-
+            await createUserWithEmailAndPassword(auth, email, password);
             navigate("/");
         } catch (error) {
-            setMessage("failed to sign up");
+            setMessage(error.message);
         }
     };
 
@@ -36,11 +37,12 @@ const Register = () => {
                 </Grid>
                 <TextField label="Email" placeholder="Enter Email" variant="outlined" fullWidth required onChange={({ target }) => setEmail(target.value)} sx={{ margin: "10px 0" }} />
                 <TextField label="Password" placeholder="Enter Password" type="password" variant="outlined" fullWidth required onChange={({ target }) => setPassword(target.value)} />
-                <FormControlLabel control={<Checkbox name="checkedB" color="primary" />} label="Remember me" />
+
+                <Typography color={"red"}>{message}</Typography>
+
                 <Button type="submit" color="primary" variant="contained" style={btnstyle} fullWidth onClick={handleSubmit}>
                     Sign up
                 </Button>
-                <Typography>{message}</Typography>
                 <Typography>
                     <Link href="#">Forgot password ?</Link>
                 </Typography>

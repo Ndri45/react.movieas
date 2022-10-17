@@ -6,7 +6,7 @@ import { LockOutlined } from "@mui/icons-material";
 const Login = () => {
     const btnstyle = { margin: "8px 0" };
     const avatarStyle = { backgroundColor: "#1bbd7e" };
-    const paperStyle = { padding: 20, height: "70vh", width: 280, margin: "20px auto" };
+    const paperStyle = { padding: 20, width: 400, margin: "120px auto" };
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

@@ -8,11 +8,15 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useSelector } from "react-redux";
+import { auth } from "../configs/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Button } from "@mui/material";
+import { async } from "@firebase/util";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const pages = [
     { name: "Bookmark", path: "/bookmark" },
@@ -22,13 +26,15 @@ const pages = [
 const settings = ["Logout"];
 
 export default function NavBar() {
-    const user = useSelector((state) => console.log(state.user));
+    const [user] = useAuthState(auth);
+    const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -39,6 +45,15 @@ export default function NavBar() {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -152,7 +167,18 @@ export default function NavBar() {
                                 <>
                                     <Tooltip title="Open settings">
                                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                            <Typography
+                                                component="span"
+                                                sx={{
+                                                    fontFamily: "monospace",
+                                                    color: "white",
+                                                    textDecoration: "none",
+                                                    marginRight: "10px",
+                                                }}
+                                            >
+                                                {user.email}
+                                            </Typography>
+                                            <Avatar alt="Remy Sharp" src="https://source.unsplash.com/random/?avatar" />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -171,11 +197,9 @@ export default function NavBar() {
                                         open={Boolean(anchorElUser)}
                                         onClose={handleCloseUserMenu}
                                     >
-                                        {settings.map((setting) => (
-                                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                                <Typography textAlign="center">{setting}</Typography>
-                                            </MenuItem>
-                                        ))}
+                                        <Button variant="text" onClick={handleSignOut}>
+                                            Sing Out
+                                        </Button>
                                     </Menu>
                                 </>
                             )}

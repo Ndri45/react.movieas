@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem, Stack } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import { auth } from "../configs/firebase";
@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const pages = [
     { name: "Bookmark", path: "/bookmark" },
@@ -68,6 +69,8 @@ export default function NavBar() {
                         >
                             M O V I E S
                         </Typography>
+
+                        <SearchBar />
 
                         <Box sx={{ flexGrow: 1, float: "end", display: { xs: "flex", md: "none" } }}>
                             <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
@@ -169,22 +172,13 @@ export default function NavBar() {
                                 <>
                                     <Tooltip title="Open settings">
                                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Typography
-                                                component="span"
-                                                sx={{
-                                                    fontFamily: "monospace",
-                                                    color: "white",
-                                                    textDecoration: "none",
-                                                    marginRight: "10px",
-                                                }}
-                                            >
-                                                {user.email}
-                                            </Typography>
                                             <Avatar alt="Remy Sharp" src="https://source.unsplash.com/random/?avatar" />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
-                                        sx={{ mt: "45px" }}
+                                        sx={{
+                                            mt: "40px",
+                                        }}
                                         id="menu-appbar"
                                         anchorEl={anchorElUser}
                                         anchorOrigin={{
@@ -199,9 +193,12 @@ export default function NavBar() {
                                         open={Boolean(anchorElUser)}
                                         onClose={handleCloseUserMenu}
                                     >
-                                        <Button variant="text" onClick={handleSignOut}>
-                                            Sing Out
-                                        </Button>
+                                        <Stack direction="column">
+                                            <Button variant="text">{user.email.split("@")[0]}</Button>
+                                            <Button variant="text" onClick={handleSignOut}>
+                                                Sing Out
+                                            </Button>
+                                        </Stack>
                                     </Menu>
                                 </>
                             )}

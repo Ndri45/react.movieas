@@ -17,14 +17,14 @@ export default function CatagoryList() {
     return (
         <Box
             sx={{
+                backgroundColor: "lightblue",
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "center",
-                typography: "body1",
+                typography: "body2",
                 "& > :not(style) + :not(style)": {
                     ml: 2,
                 },
-                marginTop: "10px",
             }}
         >
             {genres.map((genre) => {

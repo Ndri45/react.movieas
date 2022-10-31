@@ -1,4 +1,4 @@
-import { Box, Grid, Pagination, Stack, Toolbar } from "@mui/material";
+import { Box, Grid, ImageList, Pagination, Stack, Toolbar } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CatagoryList from "../containers/CatagoryList";
@@ -22,17 +22,17 @@ const Home = () => {
     return (
         <>
             <NavBar />
-            <SearchBar />
             <CatagoryList />
             <Box sx={{ flexGrow: 1, padding: "20px" }}>
-                <Grid justifyContent={"center"} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid justifyContent={"center"} container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 10 }}>
                     {movies.map((movie, index) => (
-                        <Grid item xs={4} sm={4} md={3} key={index}>
+                        <Grid item xs={4} sm={4} md={2} key={index}>
                             <MovieCard movie={movie} />
                         </Grid>
                     ))}
                 </Grid>
             </Box>
+
             <Toolbar />
             <Stack justifyContent={"center"} direction="row">
                 <Pagination count={10} color="primary" onChange={(event, page) => setPage(page)} sx={{ justifyContent: "center" }} />

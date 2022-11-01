@@ -12,7 +12,7 @@ export default function CatagoryList() {
             setGenres(data.genres);
         };
         fetchGenres();
-    });
+    }, []);
 
     return (
         <Box
@@ -29,7 +29,7 @@ export default function CatagoryList() {
         >
             {genres.map((genre) => {
                 return (
-                    <Link href="#" underline="hover">
+                    <Link key={genre.id} href="#" underline="hover">
                         {genre.name}
                     </Link>
                 );

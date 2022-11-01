@@ -37,6 +37,7 @@
   }
 }
 
-.card-hovered{
+.hovered{
   display: none;
+  transition: display 2s .5s;
 }

@@ -16,6 +16,7 @@ export default function CatagoryList() {
 
     return (
         <Box
+            position={"fixed"}
             sx={{
                 backgroundColor: "lightblue",
                 display: "flex",
@@ -25,6 +26,9 @@ export default function CatagoryList() {
                 "& > :not(style) + :not(style)": {
                     ml: 2,
                 },
+                left: 0,
+                right: 0,
+                zIndex: 999,
             }}
         >
             {genres.map((genre) => {

@@ -18,7 +18,11 @@ export default function MovieCard({ movie }) {
 
     return (
         <Card id={movie.id} sx={{ position: "relative" }}>
-            <CardMedia component="img" height="250" image={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
+            {movie.poster_path ? (
+                <CardMedia component="img" image={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
+            ) : (
+                <CardMedia component="img" image={"https://source.unsplash.com/random/?notfound"} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
+            )}
             <Box position={"absolute"} className="hover-card hovered" sx={{ backgroundColor: "#000000aa", zIndex: "99", top: " 0px", left: 0, width: "100%", height: "100%" }} onMouseLeave={(target) => handelMouseOut(target)}>
                 <Typography variant="h6" color={"white"}>
                     {movie.title}

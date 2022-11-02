@@ -1,9 +1,9 @@
 import { Pagination, Stack } from "@mui/material";
 
-const PaginationStack = ({ onSetPage }) => {
+const PaginationStack = ({ onSetPage, count }) => {
     return (
-        <Stack justifyContent={"center"} direction="row">
-            <Pagination count={10} color="primary" onChange={(event, page) => onSetPage(page)} sx={{ justifyContent: "center" }} />
+        <Stack justifyContent={"center"} direction="row" mb={"100px"}>
+            <Pagination count={count} color="primary" onChange={(event, page) => onSetPage(page)} sx={{ justifyContent: "center" }} />
         </Stack>
     );
 };

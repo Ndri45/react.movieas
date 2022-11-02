@@ -6,7 +6,7 @@ const MovieList = ({ movies }) => {
         <Box sx={{ flexGrow: 1, padding: "20px" }}>
             <Grid justifyContent={"center"} container spacing={{ xs: 2, md: 1 }} columns={{ xs: 4, sm: 8, md: 10 }}>
                 {movies.map((movie, index) => (
-                    <Grid item xs={4} sm={2} md={1} key={index}>
+                    <Grid item xs={2} sm={2} md={1} key={index}>
                         <MovieCard movie={movie} />
                     </Grid>
                 ))}

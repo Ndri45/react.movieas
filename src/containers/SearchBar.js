@@ -1,5 +1,6 @@
 import { styled, alpha, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useEffect, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -44,13 +45,28 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ handleSearch }) {
+    const [keyword, setKeyword] = useState("");
+    const handleChange = ({ target }) => {
+        setKeyword(target.value);
+    };
+
+    useEffect(() => {
+        const listener = (event) => {
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                handleSearch(keyword);
+            }
+        };
+        document.addEventListener("keydown", listener);
+        return () => document.removeEventListener("keydown", listener);
+    }, [handleSearch, keyword]);
+
     return (
         <Search>
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} />
+            <StyledInputBase placeholder="Search…" inputProps={{ "aria-label": "search" }} onChange={handleChange} />
         </Search>
     );
 }

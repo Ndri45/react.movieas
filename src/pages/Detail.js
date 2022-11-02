@@ -2,7 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Toolbar } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -29,7 +29,7 @@ export default function Detail() {
     return (
         <>
             <NavBar />
-            <Card sx={{ width: "1000px", margin: "auto", marginTop: "60px" }}>
+            <Card sx={{ width: "1000px", margin: "60px auto" }}>
                 <CardActionArea>
                     <CardMedia component="img" height={"500px"} image={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} alt="green iguana" />
                     <CardContent>
@@ -45,6 +45,7 @@ export default function Detail() {
                     </CardContent>
                 </CardActionArea>
             </Card>
+            <Toolbar />
         </>
     );
 }

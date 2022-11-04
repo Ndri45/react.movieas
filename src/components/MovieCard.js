@@ -24,12 +24,14 @@ export default function MovieCard({ movie }) {
                 <CardMedia component="img" image={"https://source.unsplash.com/random/?notfound"} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
             )}
             <Box position={"absolute"} className="hover-card hovered" sx={{ backgroundColor: "#000000aa", zIndex: "99", top: " 0px", left: 0, width: "100%", height: "100%" }} onMouseLeave={(target) => handelMouseOut(target)}>
-                <Typography variant="h6" color={"white"}>
+                <Typography variant="caption" color={"white"}>
                     {movie.title}
                 </Typography>
                 <Link to={"/" + movie.id}>
-                    <Button variant={"contained"} sx={{ position: "absolute", top: "120px", left: "0", right: "0", width: "80%", margin: "auto", opacity: ".7" }}>
-                        View Detail
+                    <Button variant={"contained"} sx={{ position: "absolute", top: "120px", left: "0", right: "0", width: "fit-content", margin: "auto", opacity: ".7" }}>
+                        <Typography variant="caption" color={"white"}>
+                            View Detail
+                        </Typography>
                     </Button>
                 </Link>
             </Box>

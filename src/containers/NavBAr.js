@@ -68,7 +68,7 @@ export default function NavBar({ handleSearch }) {
                                 textDecoration: "none",
                             }}
                         >
-                            M O V I E S
+                            T H E M O V I E A S
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, float: "end", display: { xs: "flex", md: "none" } }}>

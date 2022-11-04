@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { tmdb_image } from "../api/tmdb";
 
 export default function MovieCard({ movie }) {
     const handelMouseOver = (target) => {
@@ -19,7 +20,7 @@ export default function MovieCard({ movie }) {
     return (
         <Card id={movie.id} sx={{ position: "relative" }}>
             {movie.poster_path ? (
-                <CardMedia component="img" image={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
+                <CardMedia component="img" image={tmdb_image + movie.poster_path} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
             ) : (
                 <CardMedia component="img" image={"https://source.unsplash.com/random/?notfound"} alt="movie avatar" onMouseOver={({ target }) => handelMouseOver(target)} />
             )}

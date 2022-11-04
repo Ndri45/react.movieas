@@ -2,7 +2,7 @@ import * as React from "react";
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Tooltip, MenuItem, Stack } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
-import { auth } from "../configs/firebase";
+import { auth } from "../api/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";

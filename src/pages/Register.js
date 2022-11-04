@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Avatar, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined } from "@mui/icons-material";
-import { auth } from "../configs/firebase";
+import { auth } from "../api/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {

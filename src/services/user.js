@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configs/firebase";
+import { auth } from "../api/firebase";
 
 const userSlice = createSlice({
     name: "user",

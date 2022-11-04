@@ -1,13 +1,14 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import tmdb from "../api/tmdb";
 
 export default function CatagoryList({ genreId, handleGenreId }) {
     const [genres, setGenres] = useState([]);
 
     useEffect(() => {
         const fetchGenres = async () => {
-            const { data } = await axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=40f0e7d626ebd843c9c96e4bcdc282b0");
+            const { data } = await axios.get(tmdb.fetchGenres());
 
             setGenres(data.genres);
         };

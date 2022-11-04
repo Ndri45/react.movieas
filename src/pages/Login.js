@@ -3,7 +3,7 @@ import { Avatar, Button, Grid, Paper, TextField, Typography } from "@mui/materia
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined } from "@mui/icons-material";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configs/firebase";
+import { auth } from "../api/firebase";
 
 const Login = () => {
     const btnstyle = { margin: "8px 0" };

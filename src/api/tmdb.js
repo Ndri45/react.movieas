@@ -1,4 +1,3 @@
-// const tmdb_key = "40f0e7d626ebd843c9c96e4bcdc282b0";
 const tmdb_key = process.env.REACT_APP_TMDB_KEY;
 
 const tmdb = {

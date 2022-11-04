@@ -10,15 +10,14 @@ const Home = () => {
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
-    const [isQuery, setIsQuery] = useState(false);
-    const [query, setQuery] = useState(false);
-    const handleSearch = async (query, page = 1) => {
-        const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=40f0e7d626ebd843c9c96e4bcdc282b0&query=${query}&page=${page}`);
-
-        setIsQuery(true);
+    const [query, setQuery] = useState("");
+    const [genreId, setGenreId] = useState(null);
+    const handleSearch = async (query) => {
         setQuery(query);
-        setTotalPage(data.total_pages);
-        setMovies([...data.results]);
+        setGenreId(null);
+    };
+    const handleGenreId = async (genreId) => {
+        setGenreId(genreId);
     };
 
     useEffect(() => {
@@ -28,17 +27,34 @@ const Home = () => {
             setTotalPage(data.total_pages);
             setMovies([...data.results]);
         };
-        if (isQuery) {
-            handleSearch(query, page);
+        const fetchMovieByKeyword = async () => {
+            const { data } = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=40f0e7d626ebd843c9c96e4bcdc282b0&query=${query}&page=${page}`);
+
+            setTotalPage(data.total_pages);
+            setMovies([...data.results]);
+        };
+        const fetchMovieByGenreId = async () => {
+            const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=40f0e7d626ebd843c9c96e4bcdc282b0&with_genres=${genreId}&page=${page}`);
+
+            setTotalPage(data.total_pages);
+            setMovies([...data.results]);
+        };
+
+        if (genreId === null) {
+            if (query.length > 0) {
+                fetchMovieByKeyword();
+            } else {
+                fetchMovies();
+            }
         } else {
-            fetchMovies();
+            fetchMovieByGenreId();
         }
-    }, [isQuery, page, query]);
+    }, [page, query, genreId]);
 
     return (
         <>
             <NavBar handleSearch={handleSearch} />
-            <CatagoryList />
+            <CatagoryList genreId={genreId} handleGenreId={handleGenreId} />
             <Toolbar />
             <MovieList movies={movies} />
             <Toolbar />

@@ -1,8 +1,8 @@
-import { Box, Link } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function CatagoryList() {
+export default function CatagoryList({ genreId, handleGenreId }) {
     const [genres, setGenres] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,6 @@ export default function CatagoryList() {
 
     return (
         <Box
-            position={"fixed"}
             sx={{
                 backgroundColor: "lightblue",
                 display: "flex",
@@ -33,9 +32,9 @@ export default function CatagoryList() {
         >
             {genres.map((genre) => {
                 return (
-                    <Link key={genre.id} href="#" underline="hover">
-                        {genre.name}
-                    </Link>
+                    <Button variant={genre.id === genreId ? "contained" : "text"} key={genre.id} onClick={() => handleGenreId(genre.id)}>
+                        <Typography variant="caption">{genre.name}</Typography>
+                    </Button>
                 );
             })}
         </Box>
